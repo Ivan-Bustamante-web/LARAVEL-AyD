@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -20,6 +20,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
+                                <th>Opciones</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -27,7 +29,7 @@
                                 <tr>
                                     <td>{{ $tarea->id }}</td>
                                     <td>{{ $tarea->nombre }}</td>
-                                    </td>
+                                    <td>
                                         <a href="{{ route('tareas.edit', $tarea->id) }}" class="btn btn-warning btn-sm">Editar</a>
                                             <form action="{{ route('tareas.destroy', $tarea->id) }}" method="POST" style="display:inline-block;">
                                                 @csrf
