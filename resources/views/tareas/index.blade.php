@@ -49,3 +49,10 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+    <script>
+    $(document).ready(function() {
+        console.log("JQuery listo!");
+    });
+    </script>
+@endush

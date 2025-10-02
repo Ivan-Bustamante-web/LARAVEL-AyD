@@ -915,5 +915,14 @@
 <script src="{{asset('dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
+
+
+<!-- agregamos jquery-->
+<script src="{{asset('plugins/jquery/jquery.js')}}"></script>
+
+<!-- agregamos datatable-->
+ <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+@stack('scripts')
+
 </body>
 </html>
