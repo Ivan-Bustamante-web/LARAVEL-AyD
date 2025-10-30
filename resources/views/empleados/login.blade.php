@@ -105,7 +105,6 @@
                             <h6>¿Problemas para ingresar?</h6>
                             <p class="small mb-0">
                                 Contacta al administrador del sistema para verificar tus credenciales.
-                                Usuario: nombre.apellido | Contraseña: Tu DNI
                             </p>
                         </div>
                     </div>

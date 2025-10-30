@@ -138,11 +138,8 @@
 
                             <!-- Información de credenciales automáticas -->
                             <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                                <h4 class="text-sm font-medium text-blue-800 mb-2">📝 Información Importante</h4>
+                                <h4 class="text-sm font-medium text-blue-800 mb-2"> Información Importante</h4>
                                 <p class="text-sm text-blue-700">
-                                    Las credenciales de acceso se generarán automáticamente:<br>
-                                    • <strong>Usuario:</strong> nombre.apellido (en minúsculas)<br>
-                                    • <strong>Contraseña:</strong> DNI del empleado
                                 </p>
                             </div>
 

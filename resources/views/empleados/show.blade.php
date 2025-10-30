@@ -121,7 +121,7 @@
 
                         <!-- Credentials Copy Section -->
                         <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                            <h4 class="text-sm font-medium text-yellow-800 mb-2">📋 Copiar Credenciales</h4>
+                            <h4 class="text-sm font-medium text-yellow-800 mb-2"> Copiar Credenciales</h4>
                             <div class="flex space-x-2">
                                 <button class="copiar-btn inline-flex items-center px-3 py-2 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                         data-type="usuario" data-value="{{ $empleado->USER_Empleado }}">
