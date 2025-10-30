@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tareas', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->enum('role', ['admin', 'gerente', 'empleado', 'cliente'])->default('empleado');
         });
     }
 
@@ -27,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tareas');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('role');
+        });
     }
 };

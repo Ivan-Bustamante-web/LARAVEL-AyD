@@ -27,6 +27,10 @@
                     @auth
                         <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
                     @else
+
+                    {{-- BOTÓN EMPLEADOS --}}
+                    <a href="{{ route('empleados.login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline me-4">Empleados </a>
+                    
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
                         @if (Route::has('register'))
