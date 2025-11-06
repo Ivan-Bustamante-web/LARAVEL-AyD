@@ -97,39 +97,39 @@ class EmpleadoController extends Controller
 
 
     //Procesar el login de empleados
-   public function login(Request $request)
-   {
-       $request->validate([
-           'usuario' => 'required|string',
-           'password' => 'required|string',
-       ]);
-
-       // Buscar el usuario en la tabla de empleados
-       $empleado = CredencialEmpleado::where('USER_Empleado', $request->usuario)->first();
-
-       // Verificar credenciales
-       if (!$empleado || $empleado->PSSWRD_Empleado !== $request->password) {
-           throw ValidationException::withMessages([
-               'usuario' => ['Las credenciales proporcionadas son incorrectas.'],
-           ]);
-       }
-
-       // Buscar el usuario en el sistema de autenticación
-       $user = User::where('email', $empleado->EMAIL_Empleado)->first();
-
-       if ($user) {
-           // Iniciar sesión con el usuario del sistema
-           Auth::login($user);
-           
-           return redirect()->route('empleados.dashboard')
-                            ->with('success', '¡Bienvenido ' . $empleado->NAME_Empleado . '!');
-       }
-
-       throw ValidationException::withMessages([
-           'usuario' => ['Error en el sistema de autenticación.'],
-       ]);
-   }
-
+    public function login(Request $request)
+    {
+        $request->validate([
+            'usuario' => 'required|string',
+            'password' => 'required|string',
+        ]);
+    
+        // Buscar el usuario en la tabla de empleados
+        $empleado = CredencialEmpleado::where('USER_Empleado', $request->usuario)->first();
+    
+        // Verificar credenciales
+        if (!$empleado || $empleado->PSSWRD_Empleado !== $request->password) {
+            throw ValidationException::withMessages([
+                'usuario' => ['Las credenciales proporcionadas son incorrectas.'],
+            ]);
+        }
+    
+        // Buscar el usuario en el sistema de autenticación
+        $user = User::where('email', $empleado->EMAIL_Empleado)->first();
+    
+        if ($user) {
+            // Iniciar sesión con el usuario del sistema
+            Auth::login($user);
+            
+            // REDIRIGIR AL HOME PARA QUE EL HomeController DECIDA EL DASHBOARD
+            return redirect()->route('home')
+                             ->with('success', '¡Bienvenido ' . $empleado->NAME_Empleado . '!');
+        }
+    
+        throw ValidationException::withMessages([
+            'usuario' => ['Error en el sistema de autenticación.'],
+        ]);
+    }
 
     //Cerrar sesión de empleados
    public function logout(Request $request)

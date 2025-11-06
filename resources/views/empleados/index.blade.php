@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
@@ -112,11 +112,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = this.getAttribute('data-id');
             
             fetch(`/admin/empleados/${id}/copiar/${tipo}`, {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
+                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    }
             })
             .then(response => response.json())
             .then(data => {

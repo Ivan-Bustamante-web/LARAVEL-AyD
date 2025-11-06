@@ -19,11 +19,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// RUTAS DE AUTENTICACIÓN (SOLO PARA CLIENTES)
 Auth::routes();
 
+
+
+
+
+// RUTA HOME PRINCIPAL  
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// RUTAS PÚBLICAS PARA LOGIN DE EMPLEADOS Y CLIENTES
+
+
+
+// RUTAS PÚBLICAS PARA LOGIN DE PERSONAL INTERNO
 Route::prefix('empleados')->group(function () {
     Route::get('/login', function () {
         return view('empleados.login');
@@ -32,15 +41,15 @@ Route::prefix('empleados')->group(function () {
     Route::post('/login', [EmpleadoController::class, 'login'])->name('empleados.login.submit');
 });
 
-// RUTAS PARA CLIENTES (a implementar después)
-Route::prefix('clientes')->group(function () {
-    Route::get('/login', function () {
-        return view('clientes.login'); // Crearemos esta vista después
-    })->name('clientes.login');
-});
 
-// RUTAS PARA ADMINISTRADORES Y GERENTES (gestión de empleados)
-Route::middleware(['auth', 'role:gerente'])->prefix('admin')->group(function () {
+
+
+// RUTAS PARA ADMINISTRADORES Y GERENTES (CON MIDDLEWARE DE ROL)
+Route::middleware(['auth', 'role:admin,gerente'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+    
     Route::resource('empleados', EmpleadoController::class)->names([
         'index' => 'empleados.index',
         'create' => 'empleados.create',
@@ -48,9 +57,12 @@ Route::middleware(['auth', 'role:gerente'])->prefix('admin')->group(function () 
         'show' => 'empleados.show'
     ]);
     
-    Route::post('/empleados/{id}/copiar/{tipo}', [EmpleadoController::class, 'copiarCredencial'])
-         ->name('empleados.copiar');
+    Route::get('/empleados/{id}/copiar/{tipo}', [EmpleadoController::class, 'copiarCredencial'])
+    ->name('empleados.copiar');
 });
+
+
+
 
 // RUTAS PARA DASHBOARD DE EMPLEADOS
 Route::middleware(['auth', 'role:empleado'])->group(function () {
@@ -61,16 +73,22 @@ Route::middleware(['auth', 'role:empleado'])->group(function () {
     Route::post('/empleados/logout', [EmpleadoController::class, 'logout'])->name('empleados.logout');
 });
 
-// RUTAS PARA DASHBOARD DE CLIENTES (a implementar después)
-Route::middleware(['auth', 'role:cliente'])->group(function () {
-    Route::get('/clientes/dashboard', function () {
-        return view('clientes.dashboard');
-    })->name('clientes.dashboard');
-});
 
-// RUTAS PARA DASHBOARD DE GERENTES
+
+
+// RUTAS PARA DASHBOARD DE GERENTES  
 Route::middleware(['auth', 'role:gerente'])->group(function () {
     Route::get('/gerentes/dashboard', function () {
         return view('gerentes.dashboard');
     })->name('gerentes.dashboard');
+});
+
+
+
+
+// RUTA PARA DASHBOARD DE CLIENTES
+Route::middleware(['auth', 'role:cliente'])->group(function () {
+    Route::get('/clientes/dashboard', function () {
+        return view('clientes.dashboard');
+    })->name('clientes.dashboard');
 });
